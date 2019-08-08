@@ -1,26 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Song from "./fire_bow.mp3";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    start: 1,
+    rest: 1,
+    isResting: false
+  };
+
+  componentDidMount = () => {
+    this.startStart();
+  };
+
+  stopTimer = () => {
+    console.log("Claer Start");
+    clearInterval(this.timerInterval);
+  };
+
+  startStart = () => {
+    this.timerInterval = setInterval(() => {
+      console.log("Start");
+      this.setState({ start: this.state.start + 1 }, () => {
+        if (this.state.start === 46) {
+          console.log("Claer Start");
+          clearInterval(this.timerInterval);
+          this.setState({ isResting: true, start: 1 });
+          this.startRest();
+        }
+      });
+    }, 1000);
+  };
+
+  startRest = () => {
+    this.restInterval = setInterval(() => {
+      console.log("Rest");
+      this.setState({ rest: this.state.rest + 1 }, () => {
+        if (this.state.rest === 16) {
+          console.log("Claer Rest");
+          clearInterval(this.restInterval);
+          this.setState({ isResting: false, rest: 1 });
+          this.startStart();
+        }
+      });
+    }, 1000);
+  };
+
+  render() {
+    let { start, rest, isResting } = this.state;
+
+    let startScreen = (
+      <div className="Screen green">
+        <audio src={Song} controls={false} autoPlay />
+        <span>{start}</span>
+      </div>
+    );
+
+    let restScreen = (
+      <div className="Screen red">
+        <audio src={Song} controls={false} autoPlay />
+        <span>{rest}</span>
+      </div>
+    );
+    return <div className="App">{isResting ? restScreen : startScreen}</div>;
+  }
 }
 
 export default App;
