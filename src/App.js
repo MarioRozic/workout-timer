@@ -6,11 +6,12 @@ class App extends Component {
   state = {
     start: 1,
     rest: 1,
-    isResting: false
+    isResting: false,
+    isSettings: true
   };
 
   componentDidMount = () => {
-    this.startStart();
+    // this.startStart();
   };
 
   stopTimer = () => {
@@ -47,7 +48,21 @@ class App extends Component {
   };
 
   render() {
-    let { start, rest, isResting } = this.state;
+    let { start, rest, isResting, isSettings } = this.state;
+
+    let settingScreen = (
+      <div className="Screen blue">
+        <div className="workout">
+          <span>Workout time</span>
+          <input type="number" />
+        </div>
+        <div className="rest">
+          <span>Rest time</span>
+          <input type="number" />
+        </div>
+        <div className="button">GO</div>
+      </div>
+    );
 
     let startScreen = (
       <div className="Screen green">
@@ -62,7 +77,11 @@ class App extends Component {
         <span>{rest}</span>
       </div>
     );
-    return <div className="App">{isResting ? restScreen : startScreen}</div>;
+
+    let workoutScreen = isResting ? restScreen : startScreen;
+    return (
+      <div className="App">{isSettings ? settingScreen : workoutScreen}</div>
+    );
   }
 }
 
