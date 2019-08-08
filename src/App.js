@@ -32,7 +32,7 @@ class App extends Component {
           <input
             name="workoutTime"
             type="number"
-            placeholder="sec"
+            placeholder="45 sec"
             value={workoutTime}
             onChange={this.handlerInput}
           />
@@ -42,7 +42,7 @@ class App extends Component {
           <input
             name="restTime"
             type="number"
-            placeholder="sec"
+            placeholder="5 sec"
             value={restTime}
             onChange={this.handlerInput}
           />

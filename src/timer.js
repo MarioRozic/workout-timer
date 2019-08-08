@@ -52,7 +52,7 @@ class App extends Component {
     );
 
     let restScreen = (
-      <div className="Screen redd">
+      <div className="Screen red">
         <audio src={Song} controls={false} autoPlay />
         <span>{rest}</span>
       </div>
