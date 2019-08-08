@@ -19,7 +19,13 @@ class App extends Component {
 
   handlerButton = () => {
     console.log("Button handler");
-    this.setState({ isSettings: false });
+    let { workoutTime, restTime } = this.state;
+
+    if (workoutTime > 0 && restTime > 0) {
+      this.setState({ isSettings: false });
+    } else {
+      alert("Nemere prazno");
+    }
   };
 
   render() {
