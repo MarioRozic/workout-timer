@@ -41,18 +41,23 @@ class App extends Component {
     }, 1000);
   };
 
+  componentWillUnmount = () => {
+    clearInterval(this.timerInterval);
+    clearInterval(this.restInterval);
+  };
+
   render() {
     let { start, rest, isResting } = this.state;
 
     let startScreen = (
-      <div className="Screen green">
+      <div className="Screen green" onClick={this.props.handlerClose}>
         <audio src={Song} controls={false} autoPlay />
         <span>{start}</span>
       </div>
     );
 
     let restScreen = (
-      <div className="Screen red">
+      <div className="Screen red" onClick={this.props.handlerClose}>
         <audio src={Song} controls={false} autoPlay />
         <span>{rest}</span>
       </div>

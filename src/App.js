@@ -28,6 +28,10 @@ class App extends Component {
     }
   };
 
+  handlerClose = () => {
+    this.setState({ isSettings: true });
+  };
+
   render() {
     let { isSettings, workoutTime, restTime } = this.state;
 
@@ -64,7 +68,11 @@ class App extends Component {
         {isSettings ? (
           settingScreen
         ) : (
-          <Timer workoutTime={workoutTime} restTime={restTime} />
+          <Timer
+            workoutTime={workoutTime}
+            restTime={restTime}
+            handlerClose={this.handlerClose}
+          />
         )}
       </div>
     );
